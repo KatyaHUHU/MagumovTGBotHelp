@@ -26,7 +26,7 @@ def hello(message):
         markup.add(btn_signup)
         markup.add(btn_faq)
         # Отправка привестсвенного сообщения
-        bot.send_message(message.from_user.id, "Я твою маму через раму", reply_markup=markup)
+        bot.send_message(message.from_user.id, "Что вас интерисует?", reply_markup=markup)
 
 # Фукнция обработки прочего текста
 @bot.message_handler(content_types = ['text'])
@@ -40,8 +40,9 @@ def get_message_text(message):
         btn_back = types.KeyboardButton("Назад")
         markup_about = types.ReplyKeyboardMarkup(resize_keyboard=True)
         markup_about.add(btn_back)
+        # Отправка вопросов
+        bot.send_message(message.from_user.id, templates.about_me, reply_markup=markup_about, parse_mode='Markdown')
         # Отправка сообщения
-        bot.send_message(message.from_user.id, "Тут рассказ о твоей маме :)", reply_markup=markup_about)
     # Переход на раздел с записью на консультацию
     elif message.text == "Запись на консультацию":
         # Добавление кнопок
@@ -53,7 +54,7 @@ def get_message_text(message):
         markup_about.add(btn_back)
         keyboard.add(btn_link)
         # Отправка сообщений с кнопками
-        bot.send_message(message.from_user.id, "Запись можно произвести по номеру: +7 921 220-34-64\nИли по сайту ниже: ", reply_markup=markup_about)
+        bot.send_message(message.from_user.id, "Запись можно произвести по номеру: +7 921 220-34-64, а так же в группе в вк\nИли по сайту ниже: ", reply_markup=markup_about)
         bot.send_message(message.from_user.id, "Ссылка на сайт", reply_markup=keyboard)
     # Переход на раздел с часто задаваемыми вопросами
     elif message.text == "Часто задаваемые вопросы":
